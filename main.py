@@ -137,6 +137,17 @@ def show_prompt_detail():
     print("카테고리: " + prompt["category"])
     print("즐겨찾기 여부: " + ("예" if prompt["favorite"] else "아니오"))
 
+def manage_favorites():
+    show_list()
+    index = int(input("즐겨찾기 관리할 프롬프트 번호: ")) - 1
+
+    if index < 0 or index >= len(prompts):
+        print("잘못된 선택입니다.")
+        return
+
+    prompt = prompts[index]
+    prompt["favorite"] = not prompt["favorite"]
+    print("즐겨찾기 상태가 변경되었습니다.")
 
 
 while True:
@@ -157,5 +168,7 @@ while True:
         search_prompt()
     elif choice == "5":
         show_prompt_detail()
+    elif choice == "6":
+        manage_favorites()
     else:
         print("아직 구현되지 않은 기능입니다.")
