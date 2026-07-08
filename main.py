@@ -1,13 +1,13 @@
 prompts = [
     {
-        "title": "블로그 글 작성 도우미",
-        "content": "주어진 주제에 대해 서론, 본론, 결론 구조의 블로그 글을 작성한다.",
-        "category": "텍스트 생성",
+        "title": "요구사항 분석 전문가",
+        "content": "당신은 10년 이상의 경력을 가진 서비스 기획자이자 요구사항 분석 전문가입니다. 사용자의 모호한 아이디어를 구조화하여 개발 가능한 요구사항으로 정리하는 역할을 수행합니다.",
+        "category": "페르소나",
         "favorite": False
     },
     {
-        "title": "이미지 생성 프롬프트",
-        "content": "제품이나 서비스의 특징을 반영한 이미지 생성 프롬프트를 작성한다.",
+        "title": "의도노트AI 씬1 이미지 생성 프롬프트",
+        "content": "늦은 밤의 조용한 작업 책상 장면을 만들어줘. 노트북 화면에는 빈 문서가 열려 있고, 문서 첫 줄에 커서만 깜빡이는 느낌이 보인다.사용자는 글을 써야 하지만 시작하지 못하고 있으며, 얼굴은 보이지 않고 키보드 위에 멈춘 손만 보인다.",
         "category": "이미지 생성",
         "favorite": False
     },
@@ -45,9 +45,33 @@ def show_list():
     print("총 " + str(len(prompts)) + "개의 프롬프트")
 
 def add_prompt():
+    print("\n===== 프롬프트 추가 =====")
     title = input("제목: ")
     content = input("내용: ")
-    category = input("카테고리: ")
+    print("\n===== 카테고리 선택 =====")
+    print("1. 텍스트 생성")
+    print("2. 이미지 생성")
+    print("3. 자동화")
+    print("4. 페르소나")
+    print("5. 영상 생성")
+    print("6. 기타")
+    category = input("선택: ")
+    
+    if category == "1":
+        category = "텍스트 생성"
+    elif category == "2":
+        category = "이미지 생성"
+    elif category == "3":
+        category = "자동화"
+    elif category == "4":
+        category = "페르소나"
+    elif category == "5":
+        category = "영상 생성"
+    elif category == "6":
+        category = "기타"
+    else:
+        print("잘못된 선택입니다.")
+        return
 
     new_prompt = {
         "title": title,
@@ -64,7 +88,7 @@ def show_category():
     print("1. 텍스트 생성")
     print("2. 이미지 생성")
     print("3. 자동화")
-    print("4. 프롬프트")
+    print("4. 페르소나")
     print("5. 영상 생성")
     print("6. 기타")
     print("0. 뒤로가기")
@@ -187,6 +211,6 @@ while True:
         manage_favorites()
     elif choice == "7":
         show_favorites()
-        
+
     else:
         print("아직 구현되지 않은 기능입니다.")
