@@ -44,6 +44,21 @@ def show_list():
 
     print("총 " + str(len(prompts)) + "개의 프롬프트")
 
+def add_prompt():
+    title = input("제목: ")
+    content = input("내용: ")
+    category = input("카테고리: ")
+
+    new_prompt = {
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    }
+
+    prompts.append(new_prompt)
+    print("프롬프트가 추가되었습니다.")
+
 while True:
     show_menu()
 
@@ -53,19 +68,7 @@ while True:
         print("프로그램을 종료합니다.")
         break
     elif choice == "1":
-        title = input("제목: ")
-        content = input("내용: ")
-        category = input("카테고리: ")
-
-        new_prompt = {
-        "title": title,
-        "content": content,
-        "category": category,
-        "favorite": False
-        }
-
-        prompts.append(new_prompt)
-        print("프롬프트가 추가되었습니다.")
+        add_prompt()
     elif choice == "2":
         show_list()
     else:
