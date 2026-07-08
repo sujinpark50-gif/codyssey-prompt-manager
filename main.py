@@ -59,6 +59,52 @@ def add_prompt():
     prompts.append(new_prompt)
     print("프롬프트가 추가되었습니다.")
 
+def show_category():
+    print("\n===== 카테고리별 조회 =====")
+    print("1. 텍스트 생성")
+    print("2. 이미지 생성")
+    print("3. 자동화")
+    print("4. 프롬프트")
+    print("5. 영상 생성")
+    print("6. 기타")
+    print("0. 뒤로가기")
+    category = input("조회할 카테고리: ")
+    
+    if category == "0":
+        return
+    elif category == "1":
+        category = "텍스트 생성"
+    elif category == "2":
+        category = "이미지 생성"
+    elif category == "3":
+        category = "자동화"
+    elif category == "4":
+        category = "페르소나"
+    elif category == "5":
+        category = "영상 생성"
+    elif category == "6":
+        category = "기타"
+    else:
+        print("잘못된 선택입니다.")
+        return
+
+    filtered_prompts = []
+
+    for prompt in prompts:
+        if prompt["category"] == category:
+            filtered_prompts.append(prompt)
+
+    if len(filtered_prompts) == 0:
+        print("해당 카테고리의 프롬프트가 없습니다.")
+        return
+
+    print("\n=== " + category + " 프롬프트 목록 ===")
+    for index, prompt in enumerate(filtered_prompts, start=1):
+        star = "⭐" if prompt["favorite"] else ""
+        print(str(index) + ". " + prompt["title"] + " " + star)
+
+
+
 while True:
     show_menu()
 
@@ -71,5 +117,8 @@ while True:
         add_prompt()
     elif choice == "2":
         show_list()
+    elif choice == "3": 
+        show_category()
+
     else:
         print("아직 구현되지 않은 기능입니다.")
