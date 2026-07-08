@@ -31,6 +31,18 @@ def show_menu():
     print("7. 즐겨찾기 목록")
     print("0. 종료")
 
+def show_list():
+    print("\n=== 프롬프트 목록 ===")
+
+    if len(prompts) == 0:
+        print("등록된 프롬프트가 없습니다.")
+        return
+
+    for index, prompt in enumerate(prompts, start=1):
+        star = "⭐" if prompt["favorite"] else ""
+        print(str(index) + ". [" + prompt["category"] + "] " + prompt["title"] + " " + star)
+
+    print("총 " + str(len(prompts)) + "개의 프롬프트")
 
 while True:
     show_menu()
@@ -40,5 +52,21 @@ while True:
     if choice == "0":
         print("프로그램을 종료합니다.")
         break
+    elif choice == "1":
+        title = input("제목: ")
+        content = input("내용: ")
+        category = input("카테고리: ")
+
+        new_prompt = {
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+        }
+
+        prompts.append(new_prompt)
+        print("프롬프트가 추가되었습니다.")
+    elif choice == "2":
+        show_list()
     else:
         print("아직 구현되지 않은 기능입니다.")
