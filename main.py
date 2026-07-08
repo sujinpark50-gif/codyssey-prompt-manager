@@ -149,6 +149,21 @@ def manage_favorites():
     prompt["favorite"] = not prompt["favorite"]
     print("즐겨찾기 상태가 변경되었습니다.")
 
+def show_favorites():
+    print("\n=== 즐겨찾기 목록 ===")
+
+    favorite_prompts = []
+
+    for prompt in prompts:
+        if prompt["favorite"] == True:
+            favorite_prompts.append(prompt)
+
+    if len(favorite_prompts) == 0:
+        print("즐겨찾기된 프롬프트가 없습니다.")
+        return
+
+    for index, prompt in enumerate(favorite_prompts, start=1):
+        print(str(index) + ". [" + prompt["category"] + "] " + prompt["title"])
 
 while True:
     show_menu()
@@ -170,5 +185,8 @@ while True:
         show_prompt_detail()
     elif choice == "6":
         manage_favorites()
+    elif choice == "7":
+        show_favorites()
+        
     else:
         print("아직 구현되지 않은 기능입니다.")
