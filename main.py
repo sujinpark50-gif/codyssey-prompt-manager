@@ -122,6 +122,20 @@ def search_prompt():
         print(str(index) + ". [" + prompt["category"] + "] " + prompt["title"] + " " + star)
 
 
+def show_prompt_detail():
+    show_list()
+    index = int(input("상세보기할 프롬프트 번호: ")) - 1
+
+    if index < 0 or index >= len(prompts):
+        print("잘못된 선택입니다.")
+        return
+
+    prompt = prompts[index]
+    print("\n=== 프롬프트 상세 정보 ===")
+    print("제목: " + prompt["title"])
+    print("내용: " + prompt["content"])
+    print("카테고리: " + prompt["category"])
+    print("즐겨찾기 여부: " + ("예" if prompt["favorite"] else "아니오"))
 
 
 
@@ -141,6 +155,7 @@ while True:
         show_category()
     elif choice == "4":
         search_prompt()
-        
+    elif choice == "5":
+        show_prompt_detail()
     else:
         print("아직 구현되지 않은 기능입니다.")
