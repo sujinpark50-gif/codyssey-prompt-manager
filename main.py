@@ -103,6 +103,26 @@ def show_category():
         star = "⭐" if prompt["favorite"] else ""
         print(str(index) + ". " + prompt["title"] + " " + star)
 
+def search_prompt():
+    keyword = input("검색어: ")
+
+    filtered_prompts = []
+
+    for prompt in prompts:
+        if keyword in prompt["title"] or keyword in prompt["content"]:
+            filtered_prompts.append(prompt)
+
+    if len(filtered_prompts) == 0:
+        print("검색 결과가 없습니다.")
+        return
+
+    print("\n=== 검색 결과 ===")
+    for index, prompt in enumerate(filtered_prompts, start=1):
+        star = "⭐" if prompt["favorite"] else ""
+        print(str(index) + ". [" + prompt["category"] + "] " + prompt["title"] + " " + star)
+
+
+
 
 
 while True:
@@ -119,6 +139,8 @@ while True:
         show_list()
     elif choice == "3": 
         show_category()
-
+    elif choice == "4":
+        search_prompt()
+        
     else:
         print("아직 구현되지 않은 기능입니다.")
