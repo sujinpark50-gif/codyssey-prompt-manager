@@ -1,7 +1,6 @@
-while True:
-    name = input("이름을 입력하세요(종료는 q): ")
+def hello():
+    print("안녕하세요")
 
-    if name == "q":
-        break
-
-    print("안녕하세요", name)
+hello()
+hello()
+hello()
