@@ -74,11 +74,15 @@ def add_prompt():
 def show_list():
     print("\n=== 프롬프트 목록 ===")
     
+      if len(prompts) == 0:
+        print("등록된 프롬프트가 없습니다.")
+        return
+
     for index, prompt in enumerate(prompts, start=1):
         star = "⭐" if prompt["favorite"] else ""
         print(str(index) + ". [" + prompt["category"] + "] " + prompt["title"] + " " + star)
 
-
+        print("총 " + str(len(prompts)) + "개의 프롬프트")
 
 def show_category():
     print("\n===== 카테고리별 조회 =====")
