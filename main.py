@@ -71,6 +71,15 @@ def add_prompt():
     prompts.append(new_prompt)
     print("프롬프트가 추가되었습니다.")
 
+def show_list():
+    print("\n=== 프롬프트 목록 ===")
+    
+    for index, prompt in enumerate(prompts, start=1):
+        star = "⭐" if prompt["favorite"] else ""
+        print(str(index) + ". [" + prompt["category"] + "] " + prompt["title"] + " " + star)
+
+
+
 def show_category():
     print("\n===== 카테고리별 조회 =====")
     print("1. 텍스트 생성")
