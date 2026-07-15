@@ -49,6 +49,7 @@ def show_menu():
     print("8. 프롬프트 수정")
     print("9. 조회수 상위 5 프롬프트")
     print("10. 프롬프트 삭제")
+    print("11. Markdown으로 내보내기")
     print("0. 종료")
 
 
@@ -149,6 +150,56 @@ def show_category():
     for index, prompt in enumerate(filtered_prompts, start=1):
         star = "⭐" if prompt["favorite"] else ""
         print(str(index) + ". " + prompt["title"] + " " + star)
+
+def export_markdown(): 
+    print("\n===== 카테고리별 Markdown으로 내보내기 =====")
+    print("1. 텍스트 생성")
+    print("2. 이미지 생성")
+    print("3. 자동화")
+    print("4. 페르소나")
+    print("5. 영상 생성")
+    print("6. 기타")
+    print("0. 뒤로가기")
+    category = input("내보낼 카테고리: ")
+    
+    if category == "0":
+        return
+    elif category == "1":
+        category = "텍스트 생성"
+    elif category == "2":
+        category = "이미지 생성"
+    elif category == "3":
+        category = "자동화"
+    elif category == "4":
+        category = "페르소나"
+    elif category == "5":
+        category = "영상 생성"
+    elif category == "6":
+        category = "기타"
+    else:
+        print("잘못된 선택입니다.")
+        return
+
+    filtered_category = []
+
+    for prompt in prompts:
+        if prompt["category"] == category:
+            filtered_category.append(prompt)
+
+    if len(filtered_category) == 0:
+        print("해당 카테고리의 프롬프트가 없습니다.")
+        return
+
+    with open(category + ".md", "w", encoding="utf-8") as file:
+        file.write("# " + category + " 프롬프트\n\n")
+        for prompt in filtered_category:
+            file.write("## " + prompt["title"] + "\n")
+            file.write(prompt["content"] + "\n\n")
+       
+    print("Markdown 생성 완료")
+
+
+
 
 def search_prompt():
     keyword = input("검색어: ")
@@ -305,5 +356,7 @@ while True:
         top_viewed_prompts()
     elif choice == "10":
         delete_prompt()
+    elif choice == "11":
+        export_markdown()       
     else:
         print("아직 구현되지 않은 기능입니다.")
