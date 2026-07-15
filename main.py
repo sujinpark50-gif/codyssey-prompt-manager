@@ -1,3 +1,5 @@
+import json
+
 prompts = [
     {
         "title": "요구사항 분석 전문가",
@@ -21,7 +23,19 @@ prompts = [
         "views": 0
     }
 ]
+def save_prompts():
+    with open("prompts.json", "w", encoding="utf-8") as file:
+        json.dump(prompts, file, ensure_ascii=False, indent=4)
 
+def load_prompts():
+    global prompts
+
+    try:
+        with open("prompts.json", "r", encoding="utf-8") as file:
+            prompts = json.load(file)
+
+    except FileNotFoundError:
+        print("저장된 프롬프트가 없습니다.")
 
 def show_menu():
     print("\n===== 나만의 프롬프트 관리 =====")
@@ -77,6 +91,7 @@ def add_prompt():
 
     prompts.append(new_prompt)
     print("프롬프트가 추가되었습니다.")
+    save_prompts()
 
 def show_list():
     print("\n=== 프롬프트 목록 ===")
@@ -159,6 +174,7 @@ def show_prompt_detail():
     index = int(input("상세보기할 프롬프트 번호: ")) - 1
     prompt = prompts[index]
     prompt["views"] += 1 
+    save_prompts()
 
     if index < 0 or index >= len(prompts):
         print("잘못된 선택입니다.")
@@ -183,6 +199,7 @@ def manage_favorites():
     prompt = prompts[index]
     prompt["favorite"] = not prompt["favorite"]
     print("즐겨찾기 상태가 변경되었습니다.")
+    save_prompts()
 
 def show_favorites():
     print("\n=== 즐겨찾기 목록 ===")
@@ -236,6 +253,7 @@ def update_prompts():
     prompts[index]["category"]=new_category
 
     print("프롬프트가 수정되었습니다.")
+    save_prompts()
 
 def top_viewed_prompts():
     sorted_prompts = sorted(prompts, key=lambda prompt: prompt["views"], reverse=True)
@@ -255,7 +273,9 @@ def delete_prompt():
 
     del prompts[index]
     print("프롬프트가 삭제되었습니다.")
+    save_prompts()
 
+load_prompts()
 
 while True:
     show_menu()
